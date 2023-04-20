@@ -1,3 +1,8 @@
+### Exampels
+
+./src/Linux/muscle5 -align examples/brd4_short.fasta -output examples/aln_brd4_short.fasta
+
+----------------------------------
 ![Muscle5](http://drive5.com/images/muscle5_header.jpg)
 
 MUSCLE is widely-used software for making multiple alignments of biological sequences. 
