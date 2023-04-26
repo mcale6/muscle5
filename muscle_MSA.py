@@ -53,13 +53,13 @@ def write_fasta_muscle(names, seqs, outfile):
 
 def MSA_sample_muscle(file, mode):
     file_name = os.path.basename(file)
-    save_folder = f'{OUTPUT_DIR}/muscleMSA_{file_name}_{random_char()}_{mode}'
+    save_folder = f'{OUTPUT_DIR}/muscleMSA__{random_char()}-{mode}_{file_name.split(".")[0]}'
     subprocess.run(["mkdir", save_folder], capture_output=False, text=True)
     if file != ".":
         a3m_paths = [file] 
-    in_ = f'{save_folder}/muscle_unAln.fasta'
-    out_ = f'{save_folder}/muscle_Aln.efa'
-    out_re = f'{save_folder}/re_aln.@.afa'
+    in_ = f'{save_folder}/unAln-{mode}_{file_name.split(".")[0]}.fasta'
+    out_ = f'{save_folder}/Aln-{mode}_{file_name.split(".")[0]}.efa'
+    #out_re = f'{save_folder}/re_aln.@.afa'
     for a3m in a3m_paths:
         header, seqs = parse_fasta(a3m)
         header, seqs = process_dataframe_muscle(header, seqs)
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     parser.add_argument('--mode', type=str, default="stratified", help='Mode of sampling')
     args = parser.parse_args()
     ####
-    MUSCLE = "/home/adaddi//data/muscle5/src/Linux/muscle"
+    MUSCLE = "/home/adaddi/data/muscle5/src/Linux/muscle"
     ###
     main_dir = "/home/adaddi/scratch/muscle_resampling"
     NAME = os.path.basename(args.a3m_file)
