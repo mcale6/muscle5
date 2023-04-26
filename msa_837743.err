@@ -1,0 +1,13 @@
+- 03:28:41.003 INFO: Input file = /home/adaddi/scratch/muscle_resampling/c_crbn_mmseqs2_uniref_env_org.a3m
+
+- 03:28:41.003 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c_crbn_uniref_env_hhfilter_cov30_start.a3m
+
+- 03:28:41.201 INFO: Input file = /home/adaddi/scratch/muscle_resampling/c_crbn_mmseqs2_uniref_env_org.a3m
+
+- 03:28:41.201 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c_crbn_uniref_env_hhfilter_cov60_start.a3m
+
+- 03:28:41.365 INFO: Input file = /home/adaddi/scratch/muscle_resampling/c_crbn_mmseqs2_uniref_env_org.a3m
+
+- 03:28:41.365 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c_crbn_uniref_env_hhfilter_cov90_start.a3m
+
+slurmstepd: error: *** JOB 837743 ON u20-compute-l2 CANCELLED AT 2023-04-26T03:36:30 ***

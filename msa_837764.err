@@ -1,0 +1,12 @@
+- 03:38:41.371 INFO: Input file = /home/adaddi/scratch/muscle_resampling/mmseqs2_METTL14_uniref_env.a3m
+
+- 03:38:41.371 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c1_m14_uniref_env_hhfilter_cov30_start.a3m
+
+- 03:38:41.576 INFO: Input file = /home/adaddi/scratch/muscle_resampling/mmseqs2_METTL14_uniref_env.a3m
+
+- 03:38:41.576 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c1_m14_uniref_env_hhfilter_cov60_start.a3m
+
+- 03:38:41.660 INFO: Input file = /home/adaddi/scratch/muscle_resampling/mmseqs2_METTL14_uniref_env.a3m
+
+- 03:38:41.660 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c1_m14_uniref_env_hhfilter_cov90_start.a3m
+

@@ -1,0 +1,13 @@
+- 03:35:11.267 INFO: Input file = /home/adaddi/scratch/muscle_resampling/mmseqs2_METTL3_uniref_env.a3m
+
+- 03:35:11.267 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c_crbn_uniref_env_hhfilter_cov30_start.a3m
+
+- 03:35:11.706 INFO: Input file = /home/adaddi/scratch/muscle_resampling/mmseqs2_METTL3_uniref_env.a3m
+
+- 03:35:11.706 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c_crbn_uniref_env_hhfilter_cov60_start.a3m
+
+- 03:35:12.079 INFO: Input file = /home/adaddi/scratch/muscle_resampling/mmseqs2_METTL3_uniref_env.a3m
+
+- 03:35:12.079 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c_crbn_uniref_env_hhfilter_cov90_start.a3m
+
+slurmstepd: error: *** JOB 837750 ON u20-computeib-hpc4 CANCELLED AT 2023-04-26T03:36:30 ***

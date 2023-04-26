@@ -6,38 +6,11 @@ import string
 import subprocess
 import pandas as pd
 from pandarallel import pandarallel
+import sys
+sys.path.append("/home/adaddi/data/muscle5/")
+from MSAFilter import *
 pandarallel.initialize(use_memory_fs=True, progress_bar=False, nb_workers=20)
-
-def hhfilter_general(ifile, ofile, filter_type, value):
-    hhfilter = "/home/adaddi/data/hh-suite/build/src/hhfilter"
-    hhfilter_cmd = f"{hhfilter} -i {ifile} -o {ofile} -{filter_type} {value}"
-    subprocess.run(hhfilter_cmd, shell=True, check=True)
-    return ofile
-
-def count_sequences_in_msa_file(file):
-    count = 0
-    with open(file, 'r') as f:
-        for line in f:
-            if line.startswith('>'):
-                count += 1
-    return count/2
-
-def find_closest_cov(input_file, name, output_dir):
-    cov_values = [30, 60, 90]
-    closest_file = None
-    closest_diff = float('inf')
-
-    for cov_value in cov_values:
-        ofile = f'{output_dir}/{name}_hhfilter_cov{str(cov_value)}_start.a3m'
-        cov_output = hhfilter_general(input_file, ofile, "cov", cov_value)
-        seq_count = count_sequences_in_msa_file(cov_output)
-        diff = abs(seq_count - 2000)
-
-        if diff < closest_diff:
-            closest_diff = diff
-            closest_file = cov_output
-    return closest_file
-    
+   
 def random_char(y=3):
     chain_letters = list(string.ascii_uppercase)
     return ''.join(random.choice(chain_letters) for x in range(y))
@@ -78,8 +51,9 @@ def write_fasta_muscle(names, seqs, outfile):
             f.write(">%s\n%s\n" % (nm, seq))
     return
 
-def resample_muscle(output_dir, file, mode):
-    save_folder = f'{output_dir}/muscleMSA_{random_char()}_{mode}'
+def MSA_sample_muscle(file, mode):
+    file_name = os.path.basename(file)
+    save_folder = f'{OUTPUT_DIR}/muscleMSA_{file_name}_{random_char()}_{mode}'
     subprocess.run(["mkdir", save_folder], capture_output=False, text=True)
     if file != ".":
         a3m_paths = [file] 
@@ -94,27 +68,28 @@ def resample_muscle(output_dir, file, mode):
     ### Align
     print("Start MUSCLE5 MSA")
     if mode == "stratified":
-        command = ["/home/adaddi/scratch/muscle_resampling/muscle5.1.linux_intel64", "-align", in_ , "-output", out_ , "-stratified"]
+        command = [MUSCLE, "-align", in_ , "-output", out_ , "-stratified"]
     if mode == "diversified":
-        command = ["/home/adaddi/scratch/muscle_resampling/muscle5.1.linux_intel64", "-align", in_ , "-output", out_ , "-diversified"]
+        command = [MUSCLE, "-align", in_ , "-output", out_ , "-diversified"]
     result = subprocess.run(command, capture_output=True, text=True)
     if result.returncode != 0:
         print(f"MUSCLE encountered an error:\n{result.stderr}")
     return
     
 if __name__ == "__main__":
-    import argparse
-    import os
     # python /home/adaddi/data/muscle5/muscle_MSA.py /home/adaddi/scratch/muscle_resampling/c_crbn_mmseqs2_uniref_env_org.a3m c_crbn_uniref_env diversified
     parser = argparse.ArgumentParser(description='Resample a protein sequence alignment using MUSCLE')
     parser.add_argument('--a3m_file', type=str, help='A3M file name')
-    parser.add_argument('--name', type=str, help='Output file name prefix')
     parser.add_argument('--mode', type=str, default="stratified", help='Mode of sampling')
     args = parser.parse_args()
-    
-    #all_a3m_file = os.path.join(os.getcwd(), args.a3m_file)
-    
-    output_dir = "/home/adaddi/scratch/muscle_resampling/"
-    # Call the functions
-    hhfilter_ofile = find_closest_cov(args.a3m_file, args.name, output_dir)
-    muscle_foldr = resample_muscle(output_dir, hhfilter_ofile, args.mode)
+    ####
+    MUSCLE = "/home/adaddi//data/muscle5/src/Linux/muscle"
+    ###
+    main_dir = "/home/adaddi/scratch/muscle_resampling"
+    NAME = os.path.basename(args.a3m_file)
+    OUTPUT_DIR = f'{main_dir}/Sampling_{NAME.split(".")[0]}'
+    create_filter_dir(OUTPUT_DIR)
+    ### Filtering
+    hhfilter_ofile = execute_filter(args.a3m_file, OUTPUT_DIR, NAME)
+    ### Sampling MSA
+    muscle_foldr = MSA_sample_muscle(hhfilter_ofile, args.mode)

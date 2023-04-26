@@ -1,0 +1,13 @@
+- 03:38:41.368 INFO: Input file = /home/adaddi/scratch/muscle_resampling/mmseqs2_METTL3_uniref_env.a3m
+
+- 03:38:41.368 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c1_m3_uniref_env_hhfilter_cov30_start.a3m
+
+- 03:38:41.649 INFO: Input file = /home/adaddi/scratch/muscle_resampling/mmseqs2_METTL3_uniref_env.a3m
+
+- 03:38:41.649 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c1_m3_uniref_env_hhfilter_cov60_start.a3m
+
+- 03:38:41.861 INFO: Input file = /home/adaddi/scratch/muscle_resampling/mmseqs2_METTL3_uniref_env.a3m
+
+- 03:38:41.861 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c1_m3_uniref_env_hhfilter_cov90_start.a3m
+
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=837762.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.
