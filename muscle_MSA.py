@@ -8,7 +8,6 @@ import pandas as pd
 from pandarallel import pandarallel
 pandarallel.initialize(use_memory_fs=True, progress_bar=False, nb_workers=20)
 
-
 def hhfilter_general(ifile, ofile, filter_type, value):
     hhfilter = "/home/adaddi/data/hh-suite/build/src/hhfilter"
     hhfilter_cmd = f"{hhfilter} -i {ifile} -o {ofile} -{filter_type} {value}"
@@ -23,15 +22,15 @@ def count_sequences_in_msa_file(file):
                 count += 1
     return count/2
 
-def find_closest_cov(input_file, name, output_dir)
+def find_closest_cov(input_file, name, output_dir):
     cov_values = [30, 60, 90]
     closest_file = None
     closest_diff = float('inf')
 
     for cov_value in cov_values:
         ofile = f'{output_dir}/{name}_hhfilter_cov{str(cov_value)}_start.a3m'
-        cov_output = hfilter_general(input_file, ofile, "cov", cov_value)
-        seq_count = ount_sequences_in_msa_file(cov_output)
+        cov_output = hhfilter_general(input_file, ofile, "cov", cov_value)
+        seq_count = count_sequences_in_msa_file(cov_output)
         diff = abs(seq_count - 2000)
 
         if diff < closest_diff:
@@ -106,17 +105,16 @@ def resample_muscle(output_dir, file, mode):
 if __name__ == "__main__":
     import argparse
     import os
-    
-    parser = argparse.ArgumentParser(description=os.path.basename(__file__))
-    parser.add_argument('--name', type=str, help='Name')
-    parser.add_argument('--output_dir', type=str, help='Name')
-    parser.add_argument('--a3m_file', type=str, default="mmseqs2_crbn_uniref_env.a3m", help='A3M file name')
+    # python /home/adaddi/data/muscle5/muscle_MSA.py /home/adaddi/scratch/muscle_resampling/c_crbn_mmseqs2_uniref_env_org.a3m c_crbn_uniref_env diversified
+    parser = argparse.ArgumentParser(description='Resample a protein sequence alignment using MUSCLE')
+    parser.add_argument('--a3m_file', type=str, help='A3M file name')
+    parser.add_argument('--name', type=str, help='Output file name prefix')
     parser.add_argument('--mode', type=str, default="stratified", help='Mode of sampling')
-    #parser.add_argument('--value', type=int, default=600, help='Value for hhfilter')
     args = parser.parse_args()
     
-    all_a3m_file = os.path.join(os.getcwd(), args.a3m_file)
-
+    #all_a3m_file = os.path.join(os.getcwd(), args.a3m_file)
+    
+    output_dir = "/home/adaddi/scratch/muscle_resampling/"
     # Call the functions
-    hhfilter_ofile = find_closest_cov(args.a3m_file, args.name, args.output_dir)
-    muscle_foldr = resample_muscle(args.output_dir, hhfilter_ofile, args.mode)
+    hhfilter_ofile = find_closest_cov(args.a3m_file, args.name, output_dir)
+    muscle_foldr = resample_muscle(output_dir, hhfilter_ofile, args.mode)
