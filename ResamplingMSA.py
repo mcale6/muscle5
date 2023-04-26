@@ -1,13 +1,12 @@
+#!/usr/bin/env python
 import os
 import subprocess
+import argparse
 
-MUSCLE = "/home/adaddi/data/muscle5/src/Linux/muscle"
-HHREFROMAT = "/home/adaddi/data/hh-suite/scripts/reformat.pl"
-
-def reformat_musclefasta_a3m(muscle_foldr, name):
+def reformat_musclefasta_a3m(muscle_foldr):
     files = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(muscle_foldr)) for f in fn if f[-3:] == "afa"]
     for idx, in_ in enumerate(files):
-        out_ = f'{foldr}/B{idx+1}-{in_.split("-")[-1]}
+        out_ = f'{muscle_foldr}/B{idx+1}-{in_.split("-")[-1]}'
         re_file = f'{out_.split(".")[0]}_re.fasta'
         ####
         print("Reorder")
@@ -80,19 +79,30 @@ def reorder_a3m_file(input_file, re_file):
     return
 
 def resample_muscle(in_):
-    out_re =  f'{in_.split(".")[0]}___.@.afa'
+    out_re =  f'{in_.split(".")[0]}.@.afa'
     command = [MUSCLE, "-resample", in_ , "-output", out_re, "-replicates", "5", "-minconf",  "1", "-max_gap_fract", "1"]  
     result = subprocess.run(command, capture_output=True, text=True)
     if result.returncode != 0:
         print(f"MUSCLE encountered an error:\n{result.stderr}")
     return
 
-def resampled_MSA(foldr):
+def execute_resampling(foldr):
     in_ = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(foldr)) for f in fn if f[-3:] == "efa"]
     resample_muscle(in_[0])
     reformat_musclefasta_a3m(foldr)
     res = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(foldr)) for f in fn if f[-3:] == "a3m"]
     return res
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Resample MSA')
+    parser.add_argument('--foldr', type=str, help='A3M file name')
+    args = parser.parse_args()
+    MUSCLE = "/home/adaddi/data/muscle5/src/Linux/muscle"
+    HHREFROMAT = "/home/adaddi/data/hh-suite/scripts/reformat.pl"
+    #   
+    res = execute_resampling(args.foldr)
+
 
 #os.makedirs(output_foldr, exist_ok=True)
 #for file in to_mv:

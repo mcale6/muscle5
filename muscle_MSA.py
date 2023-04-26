@@ -78,7 +78,7 @@ def MSA_sample_muscle(file, mode):
     
 if __name__ == "__main__":
     # python /home/adaddi/data/muscle5/muscle_MSA.py /home/adaddi/scratch/muscle_resampling/c_crbn_mmseqs2_uniref_env_org.a3m c_crbn_uniref_env diversified
-    parser = argparse.ArgumentParser(description='Resample a protein sequence alignment using MUSCLE')
+    parser = argparse.ArgumentParser(description='New MSA from homologous protein sequences using MUSCLE')
     parser.add_argument('--a3m_file', type=str, help='A3M file name')
     parser.add_argument('--mode', type=str, default="stratified", help='Mode of sampling')
     args = parser.parse_args()

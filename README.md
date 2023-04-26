@@ -2,6 +2,9 @@
 
 ./src/Linux/muscle5 -align examples/brd4_short.fasta -output examples/aln_brd4_short.fasta
 
+For creating diversified or stratified MSA with MUSCLE5
+
+./muscle_MSA.py --a3m_file /home/adaddi/data/muscle5/mmseqs2_TEST__uniref_env.a3m --mode diversified
 ----------------------------------
 ![Muscle5](http://drive5.com/images/muscle5_header.jpg)
 
