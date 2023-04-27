@@ -10,3 +10,4 @@
 
 - 03:38:41.660 INFO: Output file = /home/adaddi/scratch/muscle_resampling/c1_m14_uniref_env_hhfilter_cov90_start.a3m
 
+slurmstepd: error: *** JOB 837764 ON u20-computeib-hpc6 CANCELLED AT 2023-04-27T03:38:49 DUE TO TIME LIMIT ***
