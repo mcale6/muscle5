@@ -1,0 +1,19 @@
+INFO: Pandarallel will run on 20 workers.
+INFO: Pandarallel will use Memory file system to transfer data between the main process and workers.
+HHFilter find_closest_cov
+HHFilter main:  /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_40-CRBN__mmseqs2_uniref_env.a3m 366.0
+HHFilter A
+Diff:  0.25  /  397.0
+Diff:  0.5  /  252.0
+Diff:  0.7  /  69.0
+HHFilter B
+Diff:  400  /  249.5
+HHFilter C
+QSC Diff:  0.25  /  246.5
+QSC Diff:  0.5  /  234.0
+QSC Diff:  0.7  /  69.0
+HHFilter D
+Diff QSC:  0.25  /  247.5
+Diff QSC:  0.5  /  145.5
+Diff QSC:  0.7  /  39.0
+Start MUSCLE5 MSA

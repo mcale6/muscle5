@@ -26,7 +26,7 @@ def count_sequences_in_msa_file(file):
 
 def find_closest_cov(input_file,  output_dir, name):
     print("HHFilter find_closest_cov")
-    cov_values = [30, 60, 90]
+    cov_values = [40, 50, 60]
     closest_file = None
     closest_diff = float('inf')
 
@@ -39,7 +39,7 @@ def find_closest_cov(input_file,  output_dir, name):
         if diff < closest_diff:
             closest_diff = diff
             closest_file = ofile
-    print("HHFilter main: ", closest_file)
+    print("HHFilter main: ", closest_file, seq_count)
     return closest_file
 
 def filter_msa_A(closest_cov_file,  output_dir, name):

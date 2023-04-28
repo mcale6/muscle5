@@ -1,0 +1,69 @@
+- 01:04:58.852 INFO: Input file = /home/adaddi/scratch/muscle_resampling/METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:58.852 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/startcov_40-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.093 INFO: Input file = /home/adaddi/scratch/muscle_resampling/METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.094 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/startcov_50-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.288 INFO: Input file = /home/adaddi/scratch/muscle_resampling/METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.288 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/startcov_60-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.479 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/startcov_40-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.479 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterA_0.25-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.649 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/startcov_40-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.649 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterA_0.5-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.704 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/startcov_40-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.704 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterA_0.7-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.744 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/startcov_40-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.744 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterB_400-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.809 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/startcov_40-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.809 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterC_0.25-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.980 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterC_0.25-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:04:59.980 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterC_400-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.055 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/startcov_40-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.056 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterC_0.5-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.118 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterC_0.5-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.118 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterC_400-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.161 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/startcov_40-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.161 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterC_0.7-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.199 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterC_0.7-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.199 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterC_400-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.225 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/startcov_40-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.225 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterD_400-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.289 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterD_400-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.289 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterD_0.25-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.314 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterD_400-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.314 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterD_0.5-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.333 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterD_400-METTL3__mmseqs2_uniref_env.a3m
+
+- 01:05:00.333 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_METTL3__mmseqs2_uniref_env/filterD_0.7-METTL3__mmseqs2_uniref_env.a3m
+
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=860529.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.

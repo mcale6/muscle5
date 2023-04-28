@@ -1,0 +1,68 @@
+- 01:04:52.112 INFO: Input file = /home/adaddi/scratch/muscle_resampling/CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.112 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_40-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.235 INFO: Input file = /home/adaddi/scratch/muscle_resampling/CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.235 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_50-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.301 INFO: Input file = /home/adaddi/scratch/muscle_resampling/CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.301 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_60-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.368 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_40-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.368 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterA_0.25-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.408 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_40-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.408 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterA_0.5-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.439 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_40-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.439 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterA_0.7-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.468 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_40-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.468 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterB_400-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.520 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_40-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.520 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterC_0.25-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.558 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterC_0.25-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.558 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterC_400-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.609 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_40-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.609 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterC_0.5-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.641 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterC_0.5-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.641 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterC_400-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.679 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_40-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.680 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterC_0.7-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.709 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterC_0.7-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.709 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterC_400-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.728 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/startcov_40-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.728 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterD_400-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.781 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterD_400-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.781 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterD_0.25-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.810 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterD_400-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.810 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterD_0.5-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.833 INFO: Input file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterD_400-CRBN__mmseqs2_uniref_env.a3m
+
+- 01:04:52.833 INFO: Output file = /home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env/filterD_0.7-CRBN__mmseqs2_uniref_env.a3m
+

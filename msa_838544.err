@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "/home/adaddi/data/muscle5/muscle_MSA.py", line 11, in <module>
-    from MSAFilter import *
-  File "/data/adaddi/muscle5/MSAFilter.py", line 14
-    return f"{OUTPUT_DIR}/{filter_name}_{str(filter_value).replace(".", "")}_{FILE_NAME}"
-                                                                    ^
-SyntaxError: f-string: unmatched '('

@@ -87,7 +87,7 @@ if __name__ == "__main__":
     ###
     main_dir = "/home/adaddi/scratch/muscle_resampling"
     NAME = os.path.basename(args.a3m_file)
-    OUTPUT_DIR = f'{main_dir}/Sampling_{NAME.split(".")[0]}'
+    OUTPUT_DIR = f'{main_dir}/Sampling_{args.mode}_{NAME.split(".")[0]}'
     create_filter_dir(OUTPUT_DIR)
     ### Filtering
     hhfilter_ofile = execute_filter(args.a3m_file, OUTPUT_DIR, NAME)

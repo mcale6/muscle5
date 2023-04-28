@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "/home/adaddi/data/muscle5/muscle_MSA.py", line 11, in <module>
-    from MSAFilter import *
-  File "/data/adaddi/muscle5/MSAFilter.py", line 16
-    def create_filter_dir()
-                           ^
-SyntaxError: expected ':'

@@ -2,11 +2,11 @@
 #SBATCH --job-name=muscle_MSA
 #SBATCH --output=msa_%j.out
 #SBATCH --error=msa_%j.err
-###SBATCH --time=24:00:00
+#SBATCH --time=24:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=20
-#SBATCH --mem=32G
+#SBATCH --mem=40G
 
 module load mamba intel
 source activate main_env
