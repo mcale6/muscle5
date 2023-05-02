@@ -54,31 +54,28 @@ def write_fasta(names, seqs, outfile, xmer):
             f.write(">%s\n%s\n" % (nm, seq))
     return
 
-def store_pairing_info(filename):
+def store_pairing_info(filename, start=3):
+    # if start =3 the query sequence is not included if 1 yes
     with open(filename, "r") as file:
         lines = file.readlines()
-        
+
     start_line = None
     end_line = None
     for idx, line in enumerate(lines):
-        if line.startswith(">101\t102"):
-            start_line = idx
-        if line == ">101\n":
+        if line.startswith(">101") and idx != 1:
             end_line = idx
             break
-    extracted_lines = lines[start_line:end_line]
-    #print(extracted_lines)
-    data = []
-
-    for line in extracted_lines:
+            
+    extracted_lines = lines[start:end_line]
+    
+    seq_names = []
+    sequences = []
+    for idx, line in enumerate(extracted_lines):
         if line.startswith(">"):
-            seq_name = line.strip()
-            sequence = ""
-        else:
-            sequence += line.strip()
-            data.append({"SequenceName": seq_name, "sequence": sequence})
+            seq_names.append(line.strip())
+            sequences.append(extracted_lines[idx+1].strip())
 
-    return pd.DataFrame(data)
+    return pd.DataFrame({"SequenceName": seq_names, "sequence": sequences })
 
 def write_fasta_unpaired(names, seqs, complex_ids, outfile, cardinality, first_line_seqs):
     with open(outfile, "w") as f:
@@ -89,51 +86,50 @@ def write_fasta_unpaired(names, seqs, complex_ids, outfile, cardinality, first_l
             f.write(">%s\n%s\n" % (nm, seq))
     return
 
-def write_fasta_unpairedpaired(unpaired_info, paired_info, outfile, cardinality):
+def write_fasta_unpairedpaired(unpaired_info, paired_info, outfile, cardinality, first_line_seqs, complex_ids):
     with open(outfile, "w") as f:
         f.write(cardinality)
+        f.write('>' + "\t".join(complex_ids) + '\n')
+        f.write(first_line_seqs)
         for nm, seq in list(zip(paired_info.SequenceName.tolist(), paired_info.sequence.tolist())):
             f.write("%s\n%s\n" % (nm, seq))
         for nm, seq in list(zip(unpaired_info.SequenceName.tolist(), unpaired_info.sequence.tolist())):
-            f.write("%s\n%s\n" % (nm, seq))
+            f.write(">%s\n%s\n" % (nm, seq))
     return
-
 
 def sampling(query_, df, output, n_controls, fname, xmer, msa_mode, sample="NO"):
     tempsU10 = []
     for i in range(n_controls):
         if sample == "uniform":
-            tmp = df.sample(n=20)
+            tmp = df.sample(n=100)
             tmp = pd.concat([query_, tmp], axis=0)
             write_fasta(tmp.SequenceName.tolist(),tmp.sequence.tolist(),
-                outfile=f'{output}/{fname.split("__mmseqs2_uniref_env.a3m")[0]}_SP{str(i)}U10__{msa_mode}.a3m', xmer=xmer)
+                outfile=f'{output}/{fname.split("__mmseqs2_uniref_env.a3m")[0]}_SP{str(i)}U100__{msa_mode}.a3m', xmer=xmer)
         #resample
-        tmp = df.sample(n=20, replace=True, random_state=i)
+        tmp = df.sample(n=100, replace=True, random_state=i)
         tmp = pd.concat([query_, tmp], axis=0)
         if xmer == "Heterodimer":
             tempsU10.append(tmp)
         else:
-            print(fname)
             write_fasta(tmp.SequenceName.tolist(),tmp.sequence.tolist(),
-                outfile=f'{output}/{fname.split("__mmseqs2_uniref_env")[0]}_SP{str(i)}R10__{msa_mode}.a3m', xmer=xmer)
+                outfile=f'{output}/{fname.split("__mmseqs2_uniref_env")[0]}_SP{str(i)}R100__{msa_mode}.a3m', xmer=xmer)
             
     tempsU100 = []   
-    if len(df) > 100:
+    if len(df) > 700:
         for i in range(n_controls):
             if sample == "uniform":
-                tmp = df.sample(n=100)
+                tmp = df.sample(n=700)
                 tmp = pd.concat([query_, tmp], axis=0)
                 write_fasta( tmp.SequenceName.tolist(), tmp.sequence.tolist(),
-                    outfile=f'{output}/{fname.split("__mmseqs2_uniref_env")[0]}_SP{str(i)}U100__{msa_mode}.a3m', xmer=xmer)
+                    outfile=f'{output}/{fname.split("__mmseqs2_uniref_env")[0]}_SP{str(i)}U700__{msa_mode}.a3m', xmer=xmer)
             #resample
-            tmp = df.sample(n=100, replace=True, random_state=i)
+            tmp = df.sample(n=700, replace=True, random_state=i)
             tmp = pd.concat([query_, tmp], axis=0)
             if xmer == "Heterodimer":
                 tempsU100.append(tmp)
             else:
-                print(fname)
                 write_fasta(tmp.SequenceName.tolist(),tmp.sequence.tolist(),
-                    outfile=f'{output}/{fname.split("__mmseqs2_uniref_env")[0]}_SP{str(i)}R100__{msa_mode}.a3m', xmer=xmer)
+                    outfile=f'{output}/{fname.split("__mmseqs2_uniref_env")[0]}_SP{str(i)}R700__{msa_mode}.a3m', xmer=xmer)
     
     tempsALL = []
     for i in range(n_controls):
@@ -141,7 +137,6 @@ def sampling(query_, df, output, n_controls, fname, xmer, msa_mode, sample="NO")
         if xmer == "Heterodimer":
             tempsALL.append(tmp)
         else:
-            print(fname)
             write_fasta(tmp.SequenceName.tolist(),tmp.sequence.tolist(),
                 outfile=f'{output}/{fname.split("__mmseqs2_uniref_env")[0]}_SP{str(i)}ALL__mmseqs2_uniref_env.a3m', xmer=xmer)
 
@@ -173,24 +168,26 @@ def generate_combined_filename(files, gaps_positions=[]):
         if  gaps_positions[i] !=[]:
             gap_pos = 'g'.join(map(str, gaps_positions[i]))
         protein = os.path.basename(file).split('__mmseqs2_uniref_env')[0].split("-")[1]
-        filter_condition = os.path.basename(file).split("-")[0]
-        subnames.append(f"{protein}_{gap_pos}_{filter_condition}")
+        #filter_condition = os.path.basename(file).split("-")[0]
+        filter_condition = os.path.basename(file).split("-")[1]
+
+        subnames.append(f"{protein}_{gap_pos}_{filter_condition}_{random_char(2)}")
 
     return "_CW_".join(subnames) + '__mmseqs2_uniref_env'
 
 def execute_sampling(parameters):
-    output = f"{parameters['save_location']}" ##### CARE!!!
+    output = f"{parameters['save_location']}" 
     os.makedirs(output, exist_ok=True)
-    ###
+
     if parameters['pairing'] != ".":
         paired_info = store_pairing_info(parameters['pairing'])
-    
+
     if parameters['xmer'] == "Monomer" or "Homodimer":
         df = process_input(parameters['file'][0])
         query_, df = process_dataframe(df, parameters['gap_cutoff'], parameters['gaps_position'], parameters['resample'])
         sampling(query_, df, output, parameters['n_controls'], parameters['fname'], 
             parameters['xmer'], parameters['sample'])
-    if parameters['xmer'] == "Heterodimer" :
+    if parameters['xmer'] == "Heterodimer":
         tempsU10_, tempsU100_, tempsALL_ = [], [], []
         complex_dict = {i: (None, None) for i in parameters['complex_ids']}
         for idx, i in enumerate(parameters['complex_ids']):
@@ -223,13 +220,20 @@ def execute_sampling(parameters):
                     tmp = pd.concat([t[j][i] for j in range(len(t))], axis=0, ignore_index=True)
                     #print("ok")
                 except:
+                    print("Error")
                     print(parameters['fname'], u_idx)
                     print([len(t) for t in tempsU10_])
                     continue
                 tmp["sequence"] = tmp.parallel_apply(lambda row: add_gap_block(row, complex_dict), axis=1)
-                write_fasta_unpaired(tmp.SequenceName.tolist(), tmp.sequence.tolist(), parameters['complex_ids'],
-                f"{output}/{parameters['fname'].split('__mmseqs2_uniref_env')[0]}_SP{str(i)}R{u_idx}__{parameters['msa_mode']}.a3m",
-                cardinality, first_line_seqs)
+                if parameters['pairing'] == ".":
+                    write_fasta_unpaired(tmp.SequenceName.tolist(), tmp.sequence.tolist(), parameters['complex_ids'],
+                    f"{output}/{parameters['fname'].split('__mmseqs2_uniref_env')[0]}_SP{str(i)}R{u_idx}__{parameters['msa_mode']}.a3m",
+                    cardinality, first_line_seqs)
+                if parameters['pairing'] != ".":
+                    write_fasta_unpairedpaired(tmp, paired_info,
+                    f"{output}/{parameters['fname'].split('__mmseqs2_uniref_env')[0]}_SP{str(i)}R{u_idx}__{parameters['msa_mode']}.a3m",
+                    cardinality, first_line_seqs,  parameters['complex_ids'])
+
     return
 
 if __name__ == "__main__":
@@ -241,28 +245,32 @@ if __name__ == "__main__":
     #args = #parser.parse_args()
     #files1 = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(args.out_dir1)) for f in fn if f[-3:] == "a3m" and 'mmseqs2' in os.path.join(dp, f)]
     #files2 = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(args.out_dir2)) for f in fn if f[-3:] == "a3m" and 'mmseqs2' in os.path.join(dp, f)]
-    out_dir1 = "/home/adaddi/scratch/muscle_resampling/Sampling_stratified_BRD4__mmseqs2_uniref_env"
-    out_dir2 = "/home/adaddi/scratch/muscle_resampling/Sampling_stratified_CRBN__mmseqs2_uniref_env"
-    out_dir =  "/home/adaddi/scratch/muscle_resampling/BRD4_CRBN__unpairedunpaired"
-    xmer = "Heterodimer"
-    pairing_info = "."
+    a3m_dir1 = "/home/adaddi/scratch/muscle_resampling/Sampling_super5_tcfMETTL3__mmseqs2_uniref_env_UIC/muscleMSA__IVZ-super5_startcov_15-tcfMETTL3__mmseqs2_uniref_env"
+    a3m_dir2 = "/home/adaddi/scratch/muscle_resampling/Sampling_super5_tcfMETTL14__mmseqs2_uniref_env_KOP/muscleMSA__GZY-super5_startcov_15-tcfMETTL14__mmseqs2_uniref_env"
+    a3m_dir3 = "/home/adaddi/scratch/muscle_resampling/Sampling_super5_tcfCRBN__mmseqs2_uniref_env_GKD/muscleMSA__DRY-super5_startcov_15-tcfCRBN__mmseqs2_uniref_env"
+    out_dir =  "/home/adaddi/scratch/muscle_resampling/CRN_METTL3_METTL14"
+    pairing_info = "/home/adaddi/scratch/muscle_resampling/tcf_m3_m14_crbn_unpaired_paired.a3m"
 
-    files1 = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(out_dir1)) for f in fn if f[-3:] == "a3m" and 'mmseqs2' in os.path.join(dp, f)]
-    files2 = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(out_dir2)) for f in fn if f[-3:] == "a3m" and 'mmseqs2' in os.path.join(dp, f)]
+    xmer = "Multimer"
 
-    for file1, file2 in zip(files1, files2):
-            params = {'file': [file1 , file2], #, file1], ########
-            'fname': ".",
+    files1 = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(a3m_dir1)) for f in fn if f[-3:] == "a3m" and 'mmseqs2' in os.path.join(dp, f)][:5]
+    files2 = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(a3m_dir2)) for f in fn if f[-3:] == "a3m" and 'mmseqs2' in os.path.join(dp, f)][:5]
+    files3 = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(a3m_dir3)) for f in fn if f[-3:] == "a3m" and 'mmseqs2' in os.path.join(dp, f)][:5]
+
+    for file1, file2, file3 in zip(files1, files2, files3):
+            params = {'file': [file1 , file2, file3], #, file1], ########
+            'fname': "f_crbn_m3_m14",
             'gap_cutoff': 0.25,
             'resample': True,
-            'n_controls': 2, 
+            'n_controls': 3,
             'xmer': xmer,
-            'complex_ids': ['101', '102'], #######
+            'complex_ids': ['101', '102', '103'], #######
             'sample': "resample",
             'pairing': pairing_info,
-            'msa_mode': "mmseqs2_uniref_env",
+            'msa_mode': "mmseqs2_uniref_env_unpaired_paired", ####
             'save_location': out_dir,
-            'gaps_position': [list(range(10,18)), list(range(276,287))]} # [[],[]]} ######
+            'gaps_position': [[],[], []]} ,#,[list(range(10,18)), list(range(276,287))]} # [[],[]]} ######
+
             params["fname"] = generate_combined_filename(params["file"], params["gaps_position"])
             print("x", params["fname"] )
             output = execute_sampling(params)

@@ -1,4 +1,3 @@
-
 import os
 import subprocess
 
@@ -26,7 +25,7 @@ def count_sequences_in_msa_file(file):
 
 def find_closest_cov(input_file,  output_dir, name):
     print("HHFilter find_closest_cov")
-    cov_values = [40, 50, 60]
+    cov_values = [15, 20, 25, 30]
     closest_file = None
     closest_diff = float('inf')
 

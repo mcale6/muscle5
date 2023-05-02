@@ -9,6 +9,7 @@ from pandarallel import pandarallel
 import sys
 sys.path.append("/home/adaddi/data/muscle5/")
 from MSAFilter import *
+from PrepareCustomMSA import store_pairing_info
 pandarallel.initialize(use_memory_fs=True, progress_bar=False, nb_workers=20)
    
 def random_char(y=3):
@@ -25,7 +26,7 @@ def parse_fasta(filename):
             if line.startswith("#"):
                 continue
             if line[0] == ">":
-                header.append(line[1:])
+                header.append(line)
             else:
                 sequence.append(line)
 
@@ -46,7 +47,7 @@ def process_dataframe_muscle(header, seqs):
 def write_fasta_muscle(names, seqs, outfile):
     with open(outfile, "a") as f:
         for nm, seq in list(zip(names, seqs)):
-            if nm == "101":
+            if nm.startswith(">101"):
                 nm = "QUERYSEQUENCE"
             f.write(">%s\n%s\n" % (nm, seq))
     return
@@ -71,7 +72,11 @@ def MSA_sample_muscle(file, mode):
         command = [MUSCLE, "-align", in_ , "-output", out_ , "-stratified"]
     if mode == "diversified":
         command = [MUSCLE, "-align", in_ , "-output", out_ , "-diversified"]
-    result = subprocess.run(command, capture_output=True, text=True)
+    if mode == "super5":
+        out_ = out_[:-4] + ".@.afa"
+        for i in [1, 3, 10, 20]:
+            command = [MUSCLE, "-super5", in_ , "-output", out_ , "-perturb", str(i), "-perm", "all"]
+            result = subprocess.run(command, capture_output=True, text=True)
     if result.returncode != 0:
         print(f"MUSCLE encountered an error:\n{result.stderr}")
     return
@@ -81,13 +86,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='New MSA from homologous protein sequences using MUSCLE')
     parser.add_argument('--a3m_file', type=str, help='A3M file name')
     parser.add_argument('--mode', type=str, default="stratified", help='Mode of sampling')
+    #parser.add_argument('--pairing', type=str, default="false", help='Sampling pairing information')
     args = parser.parse_args()
     ####
     MUSCLE = "/home/adaddi/data/muscle5/src/Linux/muscle"
     ###
     main_dir = "/home/adaddi/scratch/muscle_resampling"
     NAME = os.path.basename(args.a3m_file)
-    OUTPUT_DIR = f'{main_dir}/Sampling_{args.mode}_{NAME.split(".")[0]}'
+    OUTPUT_DIR = f'{main_dir}/Sampling_{args.mode}_{NAME.split(".")[0]}_{random_char()}'
     create_filter_dir(OUTPUT_DIR)
     ### Filtering
     hhfilter_ofile = execute_filter(args.a3m_file, OUTPUT_DIR, NAME)

@@ -8,29 +8,17 @@ def reformat_musclefasta_a3m(muscle_foldr):
     for idx, in_ in enumerate(files):
         out_ = f'{muscle_foldr}/B{idx+1}-{in_.split("-")[-1].split(".")[0]}.a3m'
         re_file = f'{out_.split(".")[0]}_re.fasta'
+        ####
+        print("Reorder")
         reorder_afa_file(in_, re_file)
-        msa_fasta_to_a3m(re_file, out_)
-        unblock_a3m(out_)
-        #reformat_cmd = f'{HHREFROMAT} fas a3m {re_file} {out_}'
-        #subprocess.run(reformat_cmd, shell=True, check=True)
+        print("MSA FASTA TO A3M")
+        reformat_cmd = f'{HHREFROMAT} fas a3m {re_file} {out_}'
+        subprocess.run(reformat_cmd, shell=True, check=True)
         #print("Unblock")
         #unblock_a3m(out_)
     return
 
-def msa_fasta_to_a3m(input_file, output_file, HHREFROMAT):
-    print("MSA FASTA TO A3M")
-    reformat_cmd = f'{HHREFROMAT} fas a3m {input_file} {output_file}'
-    subprocess.run(reformat_cmd, shell=True, check=True)
-    return
-    
-def msa_a3m_to_fasta(input_file, output_file, HHREFROMAT):
-    print("MSA FASTA TO A3M")
-    reformat_cmd = f'{HHREFROMAT} a3m fas {input_file} {output_file}'
-    subprocess.run(reformat_cmd, shell=True, check=True)
-    return
-
 def unblock_a3m(un_file):
-    print("Unblock a3m")
     with open(un_file, "r") as file:
         lines = file.readlines()
 
@@ -93,24 +81,23 @@ def unblock_efa(input_file):
 
     return ub_in
 
-def reorder_afa_file(input_file, re_file, query_seq_id=">QUERYSEQUENCE"):
+def reorder_afa_file(input_file, re_file):
     print("REORDER QUERY ON TOP")
     with open(input_file, "r") as file:
         lines = file.readlines()
 
     query_lines = []
     other_lines = []
-    query_sequence = []
+    query_sequence = ""
 
     i = 0
     while i < len(lines):
         line = lines[i]
-        if line.strip() == query_seq_id:
+        if line.startswith(">QUERYSEQUENCE"):
             print("Has Querysequence")
-            i += 1  # skip the line with ">QUERYSEQUENCE"
-            while i < len(lines) and not lines[i].startswith(">"):
-                query_sequence.append(lines[i].strip())
-                i += 1
+            query_sequence = lines[i+1]
+            #query_lines.append(f">101\n{query_sequence}")  # when bootstrapping the query sequence (columns) will change
+            i += 2  # skip the aln and the next line
         else:
             other_lines.append(line)
             i += 1
@@ -120,13 +107,12 @@ def reorder_afa_file(input_file, re_file, query_seq_id=">QUERYSEQUENCE"):
                 i += 1
             other_lines.append("".join(sequence) + "\n")
 
-    reordered_lines = [f'#{str(len("".join(query_sequence)))}\t1\n'] + [f">101\n{''.join(query_sequence)}\n"] + other_lines
-
+    reordered_lines = [f'#{str(len(query_sequence))}\t1\n'] + [f">101\n{query_sequence}\n"] + other_lines
+    
     with open(re_file, "w") as file:
         file.writelines(reordered_lines)
 
     return
-
 
 def resample_muscle(efa):
     in_ = unblock_efa(efa)
